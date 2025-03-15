@@ -1,28 +1,36 @@
 function isValid(s: string): boolean {
-    const charArr: String[] = Array.from(s);
+    const parMap = new Map<string, string>([
+        ["}", "{"],
+        [")", "("],
+        ["]", "["]
+      ]);
+
     const openingPar: String[] = ["{","[","("];
-    const closingPar: String[] = ["}","]",")"];
-    if(s.length % 2 != 0 || closingPar.includes(charArr[0]) ){
+
+    if(s.length % 2 != 0){
         return false;
     }
-    for(let i: number = 0; i < charArr.length; i++){
-        if(closingPar.includes(charArr[i])){
-            let bracketNum = closingPar.lastIndexOf(charArr[i]);
-            if(charArr[i-1] != openingPar[bracketNum]){
-                return false;
-            }else{
-                charArr.splice(i-1,2);
-                i -= 2;
-            }
-            
+
+    let stack: String[] = [];
+
+    for(const char of s){
+        if(openingPar.includes(char)){
+            stack.push(char);
+            console.log(stack);
+        }else if(stack.length > 0 && parMap.get(char) == stack[stack.length -1]){
+            stack.pop();
+        }else{
+            return false;
         }
+
     }
-    if(charArr.length != 0){
-        return false;
-    }else{
+
+    if(stack.length==0){
         return true;
+    }else{
+        return false;
     }
 };
 
-const stringInput: string = "()[]{}";
+const stringInput: string = "{([])}";
 console.log(isValid(stringInput));

@@ -1,29 +1,34 @@
 function isValid(s) {
-    var charArr = Array.from(s);
+    var parMap = new Map([
+        ["}", "{"],
+        [")", "("],
+        ["]", "["]
+    ]);
     var openingPar = ["{", "[", "("];
-    var closingPar = ["}", "]", ")"];
-    if (s.length % 2 != 0 || closingPar.includes(charArr[0])) {
+    if (s.length % 2 != 0) {
         return false;
     }
-    for (var i = 0; i < charArr.length; i++) {
-        if (closingPar.includes(charArr[i])) {
-            var bracketNum = closingPar.lastIndexOf(charArr[i]);
-            if (charArr[i - 1] != openingPar[bracketNum]) {
-                return false;
-            }
-            else {
-                charArr.splice(i - 1, 2);
-                i -= 2;
-            }
+    var stack = [];
+    for (var _i = 0, s_1 = s; _i < s_1.length; _i++) {
+        var char = s_1[_i];
+        if (openingPar.includes(char)) {
+            stack.push(char);
+            console.log(stack);
+        }
+        else if (stack.length > 0 && parMap.get(char) == stack[stack.length - 1]) {
+            stack.pop();
+        }
+        else {
+            return false;
         }
     }
-    if (charArr.length != 0) {
-        return false;
+    if (stack.length == 0) {
+        return true;
     }
     else {
-        return true;
+        return false;
     }
 }
 ;
-var stringInput = "()[]{}";
+var stringInput = "{([])}";
 console.log(isValid(stringInput));
