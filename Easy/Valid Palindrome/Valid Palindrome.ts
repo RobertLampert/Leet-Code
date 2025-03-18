@@ -1,6 +1,5 @@
 function isPalindrome(s: string): boolean {
     s=s.toLowerCase();
-    const origString: string = s;
     for(const char of s){
         if(!/^[a-z0-9]+$/i.test(char)){
             s=s.replace(char,"");
