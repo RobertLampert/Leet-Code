@@ -13,8 +13,6 @@ function maxProfit(prices: number[]): number {
             }
         }
     }
-    console.log(profitArr);
-    console.log(currentMin);
     return profitArr[profitArr.length-1];
 };
 
