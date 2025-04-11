@@ -8,6 +8,7 @@ class Solution(object):
             nums[i] = nums[i] **2
         nums.sort()
         return nums
+    
 solution = Solution()
 nums = [-4,-1,0,3,10]
 print(solution.sortedSquares(nums))
