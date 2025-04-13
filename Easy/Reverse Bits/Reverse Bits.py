@@ -7,7 +7,6 @@ class Solution:
         if(binaryLength < 32):
             for i in range(32-binaryLength):
                 binNum = '0' + binNum
-        print(binNum)
         binNum = binNum[::-1]
         finalNum = int(binNum,2)
         return finalNum
