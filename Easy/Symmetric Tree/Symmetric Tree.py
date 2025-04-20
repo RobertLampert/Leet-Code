@@ -5,12 +5,12 @@ class Solution(object):
         queue = deque([(root, root)])
 
         while queue:
-            node1, node2 = queue.popleft()
-            if not node1 and not node2:
+            t1, t2 = queue.popleft()
+            if not t1 and not t2:
                 continue
-            if not node1 or not node2 or node1.val != node2.val:
+            if not t1 or not t2 or t1.val != t2.val:
                 return False
-            queue.append((node1.left, node2.right))
-            queue.append((node1.right, node2.left))
+            queue.append((t1.left, t2.right))
+            queue.append((t1.right, t2.left))
 
         return True
