@@ -1,18 +1,25 @@
-class Solution(object):
+class Solution(object):   
     def threeSum(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
-        mySet = set()
+        nums.sort()
+        returnSet = set()
         for i in range(len(nums)):
-            for j in range(len(nums)):
-                for k in range(len(nums)):
-                    if len({i, j, k}) == 3 and nums[i] + nums[j] + nums[k] == 0:
-                        myTuple = (nums[i],nums[j],nums[k])
-                        sortedTuple = tuple(sorted(myTuple))
-                        mySet.add(sortedTuple)
-        return list(mySet)
+            anchor = -nums[i]
+            left = 1
+            right = len(nums)-1
+            while( left != right):
+                if nums[left]+nums[right] == anchor and left != i and right != i:
+                    curTuple = tuple(sorted((nums[left],nums[right],anchor*-1)))
+                    returnSet.add(curTuple)
+                    left+=1
+                elif nums[left]+nums[right] < anchor:
+                    left+=1
+                else:
+                    right-=1
+        answer = list(returnSet)
+        return answer
+
+        
+
 solution = Solution()
-array = [-1,0,1,2,-1,-4]
+array = [-1,0,1,2,-1,-4,-2,-3,3,0,4]
 print(solution.threeSum(array))
